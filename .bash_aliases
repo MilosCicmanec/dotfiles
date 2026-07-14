@@ -179,3 +179,22 @@ seq() {
 # Unused commands:
 # alias gr='git review' # a Gerrit thing
 # alias d='git review -d'
+
+# === Create new C++ file from template ===
+mkcpp() {
+  if [ -z "$1" ]; then
+    echo "Usage: mkcpp <filename (without .cpp)>"
+    return 1
+  fi
+
+  local file="$1.cpp"
+
+  if [ -e "$file" ]; then
+    echo "Error: '$file' already exists."
+    return 1
+  fi
+
+  cp ~/.cpp_template.cpp "$file"
+  echo "Created $file from template"
+  nvim "$file"
+}
